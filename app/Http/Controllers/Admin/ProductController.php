@@ -9,6 +9,7 @@ use App\Models\Product;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\TemporaryImage;
+use App\Models\ProductImage;
 
 class ProductController extends Controller
 {
@@ -67,6 +68,12 @@ class ProductController extends Controller
                     $img = $manager->read($originalPath);
                     $img->coverDown(400, 460);
                     $img->save(public_path('uploads/products/small/' . $imageName));
+
+                    $productImage = new ProductImage();
+                    $productImage->image = $imageName;
+                    $productImage->product_id = $product->id;
+                    $productImage->save();
+
                 } catch (\Exception $e) {
                     return response()->json([
                         'status' => false,

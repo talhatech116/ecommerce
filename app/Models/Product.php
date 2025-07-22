@@ -22,4 +22,14 @@ class Product extends Model
         'barcode',
         'is_featured'
     ];
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        if($this->image == "") {
+            return "";
+        }
+        return asset('uploads/products/small/' . $this->image);
+    }
 }
