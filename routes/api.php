@@ -8,12 +8,15 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TempImageController;
+use App\Http\Controllers\front\ProductController as FrontProductController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
 Route::post('/admin/login' , [AuthController::class, 'authenticate']);
+Route::get('/latest-products', [FrontProductController::class, 'latestProducts']);
+Route::get('/featured-products', [FrontProductController::class, 'getfeaturedProducts']);
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
     // Route::get('/admin/categories', [CategoryController::class, 'index']);
