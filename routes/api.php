@@ -19,6 +19,7 @@ Route::get('/latest-products', [FrontProductController::class, 'latestProducts']
 Route::get('/featured-products', [FrontProductController::class, 'getfeaturedProducts']);
 Route::get('/get-categories', [FrontProductController::class, 'getCategories']);
 Route::get('/get-brands', [FrontProductController::class, 'getBrands']);
+Route::get('/get-products', [FrontProductController::class, 'getProducts']);
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
     // Route::get('/admin/categories', [CategoryController::class, 'index']);

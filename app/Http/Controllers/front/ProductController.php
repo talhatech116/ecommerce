@@ -5,9 +5,36 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
+
+    public function getProducts(Request $request){
+        $products = Product::orderBy('created_at', 'DESC')
+                ->where('status', 1)
+                ->limit(12);
+
+        //Filter products by category
+        if(!empty($request->category)){
+            $catArray = explode(',', $request->category);
+            $products = $products->whereIn('category_id', $catArray);
+        }
+
+        //Filter products by brand
+        if(!empty($request->brand)){
+            $brandArray = explode(',', $request->brand);
+            $products = $products->whereIn('brand_id', $brandArray);
+        }
+
+        $products = $products->get();
+
+        //Filter products by brand
+
+        return response()->json($products);
+    }
+
     public function latestProducts(){
         $products = Product::orderBy('created_at', 'DESC')
                 ->where('status', 1)
