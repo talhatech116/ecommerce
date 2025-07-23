@@ -17,6 +17,8 @@ use App\Http\Controllers\front\ProductController as FrontProductController;
 Route::post('/admin/login' , [AuthController::class, 'authenticate']);
 Route::get('/latest-products', [FrontProductController::class, 'latestProducts']);
 Route::get('/featured-products', [FrontProductController::class, 'getfeaturedProducts']);
+Route::get('/get-categories', [FrontProductController::class, 'getCategories']);
+Route::get('/get-brands', [FrontProductController::class, 'getBrands']);
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
     // Route::get('/admin/categories', [CategoryController::class, 'index']);

@@ -24,4 +24,18 @@ class ProductController extends Controller
                 ->get();
         return response()->json($products);
     }
+
+    public function getCategories(){
+        $categories = Category::orderBy('name', 'ASC')
+                                ->where('status', 1)
+                                ->get();
+        return response()->json($categories);
+    }
+
+    public function getBrands(){
+        $brands = Brand::orderBy('name', 'ASC')
+                        ->where('status', 1)
+                        ->get();
+        return response()->json($brands);
+    }
 }
